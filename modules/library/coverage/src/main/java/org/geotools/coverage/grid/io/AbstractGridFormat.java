@@ -316,7 +316,7 @@ public abstract class AbstractGridFormat implements Format {
 	 * @see org.geotools.data.coverage.grid.Format#equals(org.geotools.data.coverage.grid.Format)
 	 */
         public boolean equals(Format f) {
-		if (f.getClass() == getClass()) {
+		if (f != null && f.getClass() == getClass()) {
 			return true;
 		}
 		return false;

@@ -310,30 +310,30 @@ public final class CRS2GeoTiffMetadataAdapter {
 			throw new IllegalArgumentException(Errors.format(
 					ErrorKeys.NON_LINEAR_UNIT_$1, linearUnit));
 		}
-                if (SI.METER.equals(linearUnit)) {
+                if (linearUnit != null && SI.METER.equals(linearUnit)) {
                     metadata.addGeoShortParam(GeoTiffPCSCodes.ProjLinearUnitsGeoKey,
                             GeoTiffUoMCodes.Linear_Meter);
                     metadata.addGeoDoubleParam(GeoTiffPCSCodes.ProjLinearUnitSizeGeoKey, 1.0);
                 }else
-                    if (NonSI.NAUTICAL_MILE.equals(linearUnit)) {
+                    if (linearUnit != null && NonSI.NAUTICAL_MILE.equals(linearUnit)) {
                         metadata.addGeoShortParam(GeoTiffPCSCodes.ProjLinearUnitsGeoKey,
                                 GeoTiffUoMCodes.Linear_Mile_International_Nautical);
                         metadata.addGeoDoubleParam(GeoTiffPCSCodes.ProjLinearUnitSizeGeoKey, linearUnit
                                 .getConverterTo(SI.METER).convert(1));
                 }else
-                    if (NonSI.FOOT.equals(linearUnit)) {
+                    if (linearUnit != null && NonSI.FOOT.equals(linearUnit)) {
                         metadata.addGeoShortParam(GeoTiffPCSCodes.ProjLinearUnitsGeoKey,
                                 GeoTiffUoMCodes.Linear_Foot);
                         metadata.addGeoDoubleParam(GeoTiffPCSCodes.ProjLinearUnitSizeGeoKey, linearUnit
                                 .getConverterTo(SI.METER).convert(1));
                 } else
-                    if (NonSI.YARD.equals(linearUnit)) {
+                    if (linearUnit != null && NonSI.YARD.equals(linearUnit)) {
                         metadata.addGeoShortParam(GeoTiffPCSCodes.ProjLinearUnitsGeoKey,
                                 GeoTiffUoMCodes.Linear_Yard_Sears);// ??
                         metadata.addGeoDoubleParam(GeoTiffPCSCodes.ProjLinearUnitSizeGeoKey, linearUnit
                                 .getConverterTo(SI.METER).convert(1));
                 } else
-                    if (NonSI.FOOT_SURVEY_US.equals(linearUnit)) {
+                    if (linearUnit != null && NonSI.FOOT_SURVEY_US.equals(linearUnit)) {
                         metadata.addGeoShortParam(GeoTiffPCSCodes.ProjLinearUnitsGeoKey,
                                 GeoTiffUoMCodes.Linear_Foot_US_Survey);// ??
                         metadata.addGeoDoubleParam(GeoTiffPCSCodes.ProjLinearUnitSizeGeoKey, linearUnit

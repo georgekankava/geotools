@@ -4047,7 +4047,7 @@ public class ImageWorker {
                         try {
                             AffineTransform inverse = sTx.createInverse();
                             ROI newROI = this.roi != null ? this.roi.transform(inverse) : null;
-                            this.roi = newROI.intersect(r);
+                            this.roi = newROI != null ? newROI.intersect(r) : null;
                         } catch (NoninvertibleTransformException e) {
                             LOGGER.log(Level.SEVERE, e.getMessage(), e);
                         }
@@ -4460,10 +4460,11 @@ public class ImageWorker {
             vectorReference = vectorROIs.remove(0);
         }
         // accumulate the vector ROIs, if any
-        for (ROI roi : vectorROIs) {
-            vectorReference = vectorReference.add(roi);
+        if(vectorReference != null) {
+            for (ROI roi : vectorROIs) {
+                vectorReference = vectorReference.add(roi);
+            }
         }
-        
         // optimization in case we end up with just one ROI, no need to mosaic
         if(rasterROIs.size() == 0) {
             return vectorReference;

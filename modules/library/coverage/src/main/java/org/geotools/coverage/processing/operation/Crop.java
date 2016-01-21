@@ -333,8 +333,8 @@ public class Crop extends Operation2D {
              (roiParameter == null || roiParameter.getValue() ==null)                )
             throw new CannotCropException(Errors.format(ErrorKeys.NULL_PARAMETER_$2, PARAMNAME_ENVELOPE, GeneralEnvelope.class.toString()));
 
-        Object envelope = envelopeParameter.getValue(); 
-        if (envelope != null){
+        if (envelopeParameter != null && envelopeParameter.getValue() != null){
+        	Object envelope = envelopeParameter.getValue();
             if (envelope instanceof GeneralEnvelope){
                 cropEnvelope = (GeneralEnvelope) envelope;
             } else if (envelope instanceof Envelope){
@@ -628,7 +628,7 @@ public class Crop extends Operation2D {
 				if(rasterSpaceROI==null||rasterSpaceROI.getBounds().isEmpty())
 		            if(finalRasterArea.isEmpty())
 		            	throw new CannotCropException(Errors.format(ErrorKeys.CANT_CROP));
-				final boolean doMosaic = forceMosaic ? true : decideJAIOperation(roiTolerance, rasterSpaceROI.getBounds2D(), points);
+				final boolean doMosaic = forceMosaic ? true : decideJAIOperation(roiTolerance, rasterSpaceROI != null ? rasterSpaceROI.getBounds2D() : null, points);
 				if (doMosaic || cropROI != null || internalROI != null || nodata != null) {
 					// prepare the params for the mosaic
                     final ROI[] roiarr;
@@ -653,7 +653,7 @@ public class Crop extends Operation2D {
                                         
  					
  					//prepare the final layout
-					final Rectangle bounds = rasterSpaceROI.getBounds2D().getBounds();
+					final Rectangle bounds = rasterSpaceROI != null && rasterSpaceROI.getBounds2D() != null ? rasterSpaceROI.getBounds2D().getBounds() : null;
 					Rectangle.intersect(bounds, sourceGridRange, bounds);
 					if(bounds.isEmpty())
 						throw new CannotCropException(Errors.format(ErrorKeys.CANT_CROP));

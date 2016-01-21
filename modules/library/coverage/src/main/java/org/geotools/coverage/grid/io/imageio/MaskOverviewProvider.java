@@ -471,7 +471,7 @@ public class MaskOverviewProvider {
                 // Populating overviews
                 for (int i = 0; i < numOverviews; i++) {
                     // Handling internal and external overviews
-                    if (numExternalOverviews > 0 && i >= numInternalOverviews) {
+                    if (readerOvr != null && numExternalOverviews > 0 && i >= numInternalOverviews) {
                         int index = i - numInternalOverviews;
                         overviewsResolution[i][0] = span0 / readerOvr.getWidth(index);
                         overviewsResolution[i][1] = span1 / readerOvr.getHeight(index);

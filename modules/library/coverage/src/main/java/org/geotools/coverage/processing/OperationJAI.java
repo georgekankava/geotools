@@ -1012,7 +1012,7 @@ public class OperationJAI extends Operation2D {
             // Slight optimisation
             return true;
         }
-        if (super.equals(object)) {
+        if (object != null && super.equals(object)) {
             final OperationJAI that = (OperationJAI) object;
             return Utilities.equals(this.operation, that.operation);
         }
